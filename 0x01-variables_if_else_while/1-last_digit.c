@@ -2,7 +2,7 @@
 #include <time.h>
 #include <stdio.h>
 /**
- * main - Prints the last digits of a number and whether it is greater thn 5, less than 6, or 0.
+ * main - Prints the last digits of a number
  * Return: Always 0.
  */
 int main(void)
