@@ -1,25 +1,24 @@
-#include "main.h"
-
+#include "holberton.h"
 /**
-* puts_half-prints half of a string
-* @str: input
-* Return: half of input
+*puts_half - function that  prints half of a string,
+*@str: first value to check
+*
 */
 void puts_half(char *str)
 {
-	int index = 0, len = 0, n;
+	int i = 0, k, j;
 
-	while (str[index++])
-		len++;
-
-	if ((len % 2) == 0)
-		n = len / 2;
-
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	if (i % 2 == 0)
+		j = i / 2;
 	else
-		n = (len + 1) / 2;
-	for (index = n; index < len; index++)
-		_putchar(str[index]);
-
+		j = ((i - 1) / 2) + 1;
+	for (k = j; k < i;  k++)
+	{
+		_putchar(str[k])
+	}
 	_putchar('\n');
 }
-
