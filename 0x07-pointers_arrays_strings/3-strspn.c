@@ -4,22 +4,27 @@
  * * _strspn - search a string for a set of bytes
  * @s: source string
  * @accept: accepted string
- *
  * Return: number of bytes in the init segment
  */
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int j, j;
+	unsigned int i, n, value, check;
 
-	for (i = 0; s[1]; i++)
+	value = 0;
+
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		for (j = 0; accept[j]; j++)
+		check = 0;
+		for (n = 0; accept[n] != '\0'; n++)
 		{
-			if (s[1] == accept[j])
-				break;
+			if (accept[n] == s[i])
+			{
+				value++;
+				check = 1;
+			}
 		}
-		if (!accept[j])
-			break;
+		if (check == 0)
+			return (value);
 	}
-	return (i);
+	return (value);
 }
