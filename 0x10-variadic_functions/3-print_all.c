@@ -1,79 +1,47 @@
 #include "variadic_functions.h"
 /**
- * print_char - print characters
- * @arguments: input arguments
- */
-void print_char(va_list arguments)
-{
-	printf("%c", va_arg(arguments, int));
-}
-/**
- * print_int - print integers
- * @arguments: input arguments
- */
-void print_int(va_list arguments)
-{
-	printf("%d", va_arg(arguments, int));
-}
-/**
- * print_float - print floats
- * @arguments: input arguments
- */
-void print_float(va_list arguments)
-{
-	printf("%f", va_arg(arguments, double));
-}
-/**
- * print_string - print strings
- * @arguments: input arguments
- */
-void print_string(va_list arguments)
-{
-	char *args = va_arg(arguments, char*);
-
-	if (args == NULL)
-	{
-		printf("%p", args);
-		return;
-	}
-	printf("%s", args);
-}
-/**
  * print_all - prints anything
- * @format: input string
+ * @format: list of types of arguments passed to the function
  */
 void print_all(const char * const format, ...)
 {
-	simbol_t identifier[] = {
-		{'c', print_char},
-		{'s', print_string},
-		{'f', print_float},
-		{'i', print_int}
-	};
+	int i = 0;
+	char *str, *sep = "";
+	va_list list;
 
-	int i = 0, j;
-	char *comma = "";
+	va_start(list, format);
 
-	va_list arguments;
-
-	va_start(arguments, format);
-
-	while (format && format[i])
+	if (format)
 	{
-		j = 0;
-
-		while (j < 4)
+		while (format[i])
 		{
-			if (identifier[j].all == format[i])
+			switch (format[i])
 			{
-				printf("%s", comma);
-				identifier[j].func(arguments);
-				comma = ", ";
+				case 'c':
+					printf("%s%c", sep, va_arg(list, int));
+					break;
+				case 'i':
+					printf("%s%d", sep, va_arg(list, int));
+					break;
+				case 'f':
+					printf("%s%f", sep, va_arg(list, double));
+					break;
+				case 's':
+					str = va_arg(list, char *);
+					if (!str)
+						str = "(nil)";
+
+					printf("%s%s", sep, str);
+					break;
+				default:
+					i++;
+					continue;
 			}
-			j++;
+
+			sep = ", ";
+			i++;
 		}
-		i++;
 	}
 	printf("\n");
-	va_end(arguments);
+	va_end(list);
 }
