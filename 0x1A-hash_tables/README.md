@@ -1,1 +1,1 @@
-This task examplifies hash tables
+This task examplifies hash tables in all.
